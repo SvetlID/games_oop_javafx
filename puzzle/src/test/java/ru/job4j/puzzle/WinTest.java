@@ -25,8 +25,8 @@ public class WinTest {
         int[][] board = {
                 {0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0},
-                {1, 1, 1, 1, 1},
                 {0, 0, 0, 0, 0},
+                {1, 1, 1, 1, 1},
                 {0, 0, 0, 0, 0},
         };
         assertThat(Win.check(board), is(true));
