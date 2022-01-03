@@ -1,32 +1,22 @@
 package ru.job4j.puzzle;
 
 public class Win {
-    public static boolean horizontalCheck(int[][] board) {
+    public static boolean horizontalCheck(int[][] board, int row) {
         boolean rsl = true;
-        for (int[] rows : board) {
-            for (int cell = 0; cell < rows.length - 1; cell++) {
-                if (rows[cell] != rows[cell + 1]) {
-                    rsl = false;
-                    break;
-                }
-            }
-            if (!rsl) {
+        for (int cell = 0; cell < board[row].length - 1; cell++) {
+            if (board[row][cell] != board[row][cell + 1]) {
+                rsl = false;
                 break;
             }
         }
         return rsl;
     }
 
-    public static boolean verticalCheck(int[][] board) {
+    public static boolean verticalCheck(int[][] board, int column) {
         boolean rsl = true;
-        for (int column = 0; column < board.length; column++) {
-            for (int cell = 0; cell < board[column].length - 1; cell++) {
-                if (board[cell][column] != board[cell + 1][column]) {
-                    rsl = false;
-                    break;
-                }
-            }
-            if (!rsl) {
+        for (int row = 0; row < board[column].length - 1; row++) {
+            if (board[row][column] != board[row + 1][column]) {
+                rsl = false;
                 break;
             }
         }
@@ -34,6 +24,21 @@ public class Win {
     }
 
     public static boolean check(int[][] board) {
-       return horizontalCheck(board) || verticalCheck(board);
+        boolean resultHorisontal = true;
+        boolean resultVertical = true;
+        for (int i = 0; i < board.length; i++) {
+            if (!horizontalCheck(board, i)) {
+                resultHorisontal = false;
+                break;
+            }
+        }
+
+        for (int i = 0; i < board.length; i++) {
+            if (!verticalCheck(board, i)) {
+                resultVertical = false;
+                break;
+            }
+        }
+        return resultHorisontal || resultVertical;
     }
 }
